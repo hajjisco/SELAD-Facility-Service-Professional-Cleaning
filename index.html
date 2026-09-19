@@ -1516,11 +1516,21 @@ h1 span, h2 span {
   }
 
   .gallery-grid {
+    display: grid;
     grid-template-columns: 1fr;
+    width: 100%;
+    height: auto;
   }
 
   .gallery-intro {
-    grid-column: auto;
+     grid-column: auto;
+     display: block;
+    width: 100%;
+    height: auto;
+    max-height: 500px;
+    object-fit: contain;
+    border-radius: 10px;
+    background: #000;
   }
 
   .gallery-intro > video {
@@ -1529,6 +1539,13 @@ h1 span, h2 span {
 
   .gallery-item > img, .gallery-item > video {
     height: 230px;
+        display: block;
+    width: 100%;
+    height: auto;
+    max-height: 500px;
+    object-fit: contain;
+    border-radius: 10px;
+    background: #000;
   }
 
   .cta-inner {
