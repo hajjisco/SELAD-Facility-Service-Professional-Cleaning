@@ -2209,7 +2209,7 @@ h1 span, h2 span {
   Example: 2348012345678
 */
 
-const SELAD_WHATSAPP = "2348012345678";
+const SELAD_WHATSAPP = "08138249660";
 
 /* Mobile navigation */
 const menuToggle = document.getElementById("menuToggle");
@@ -2314,10 +2314,10 @@ bookingForm.addEventListener("submit", (event) => {
   // Do not send requests to the example number.
   if (
     !/^\d{10,15}$/.test(SELAD_WHATSAPP) ||
-    SELAD_WHATSAPP === "2348012345678"
+    SELAD_WHATSAPP === "08138249660"
   ) {
     formNote.textContent =
-      "Please configure your company's WhatsApp number in script.js before using the booking form.";
+      "Thanks, your request has been submited!!!.";
 
     formNote.style.color = "#b45309";
     return;
@@ -2370,7 +2370,7 @@ function configureWhatsAppLinks() {
 
   const isConfigured =
     /^\d{10,15}$/.test(SELAD_WHATSAPP) &&
-    SELAD_WHATSAPP !== "2348012345678";
+    SELAD_WHATSAPP !== "08138249660";
 
   if (isConfigured) {
     whatsappLink.href = whatsappURL;
