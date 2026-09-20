@@ -1968,86 +1968,199 @@ h1 span, h2 span {
       </div>
     </section>
 
-    <!-- Booking form -->
-    <form
-  id="bookingForm"
-  action="https://formspree.io/f/xoevevqb"
-  method="POST"
->
-    <section class="section booking-section" id="booking">
-      <div class="container booking-grid">
-        <div class="booking-copy">
-          <span class="eyebrow">LET'S GET STARTED</span>
-          <h2>Tell us what<br>you <span>need.</span></h2>
-          <p>Fill in the form with a few details about your space.
-            We will prepare your request so you can contact our team.</p>
+    
+<!-- Booking form -->
+<section class="section booking-section" id="booking">
+  <div class="container booking-grid">
 
-          <div class="booking-contact">
-            <div class="contact-icon">✉</div>
-            <div><small>Have a question?</small><strong>Contact our team</strong>
-              <a href="#contact">See contact details →</a></div>
-          </div>
+    <div class="booking-copy">
+      <span class="eyebrow">LET'S GET STARTED</span>
+
+      <h2>Tell us what<br>you <span>need.</span></h2>
+
+      <p>
+        Fill in the form with a few details about your space.
+        We will receive your request and contact you.
+      </p>
+
+      <div class="booking-contact">
+        <div class="contact-icon">✉</div>
+
+        <div>
+          <small>Have a question?</small>
+          <strong>Contact our team</strong>
+          <a href="#contact">See contact details →</a>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- FORM -->
+    <form
+      class="booking-form"
+      id="bookingForm"
+      action="https://formspree.io/f/xoevevqb"
+      method="POST"
+    >
+
+      <div class="form-heading">
+        <h3>Request a cleaning service</h3>
+        <p>Fields marked * are required.</p>
+      </div>
+
+
+      <!-- Full name and phone -->
+      <div class="form-row">
+
+        <div class="form-group">
+          <label for="fullName">Full name *</label>
+
+          <input
+            id="fullName"
+            name="fullName"
+            type="text"
+            placeholder="Your full name"
+            required
+          >
         </div>
 
-        <form class="booking-form" id="bookingForm">
-          <div class="form-heading">
-            <h3>Request a cleaning service</h3>
-            <p>Fields marked * are required.</p>
-          </div>
 
-          <div class="form-row">
-            <div class="form-group">
-              <label for="fullName">Full name *</label>
-              <input id="fullName" name="fullName" type="text" placeholder="Your full name" required>
-            </div>
-            <div class="form-group">
-              <label for="phone">Phone number *</label>
-              <input id="phone" name="phone" type="tel" placeholder="Your phone number" required>
-            </div>
-          </div>
+        <div class="form-group">
+          <label for="phone">Phone number *</label>
 
-          <div class="form-group">
-            <label for="email">Email address</label>
-            <input id="email" name="email" type="email" placeholder="you@example.com">
-          </div>
+          <input
+            id="phone"
+            name="phone"
+            type="tel"
+            placeholder="Your phone number"
+            required
+          >
+        </div>
 
-          <div class="form-row">
-            <div class="form-group">
-              <label for="service">Service needed *</label>
-              <select id="service" name="service" required>
-                <option value="">Choose a service</option>
-                <option>Home cleaning</option>
-                <option>School cleaning</option>
-                <option>Office cleaning</option>
-                <option>Deep cleaning</option>
-                <option>Move-in / move-out cleaning</option>
-                <option>Other facility service</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="date">Preferred date</label>
-              <input id="date" name="date" type="date">
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label for="location">Service location *</label>
-            <input id="location" name="location" type="text" placeholder="Area, city or address" required>
-          </div>
-
-          <div class="form-group">
-            <label for="message">Tell us about your space</label>
-            <textarea id="message" name="message" rows="4"
-              placeholder="What would you like us to clean?"></textarea>
-          </div>
-
-          <button type="submit" class="btn form-submit">Send booking request <span>↗</span></button>
-          <p class="form-note" id="formNote" aria-live="polite">
-            Your request will open in WhatsApp for you to send.
-          </p>
-        </form>
       </div>
-    </section>
+
+
+      <!-- Email -->
+      <div class="form-group">
+
+        <label for="email">Email address</label>
+
+        <input
+          id="email"
+          name="email"
+          type="email"
+          placeholder="you@example.com"
+        >
+
+      </div>
+
+
+      <!-- Service and date -->
+      <div class="form-row">
+
+        <div class="form-group">
+
+          <label for="service">Service needed *</label>
+
+          <select
+            id="service"
+            name="service"
+            required
+          >
+            <option value="">Choose a service</option>
+            <option value="Home cleaning">Home cleaning</option>
+            <option value="School cleaning">School cleaning</option>
+            <option value="Office cleaning">Office cleaning</option>
+            <option value="Deep cleaning">Deep cleaning</option>
+            <option value="Move-in / move-out cleaning">
+              Move-in / move-out cleaning
+            </option>
+            <option value="Other facility service">
+              Other facility service
+            </option>
+          </select>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="date">Preferred date</label>
+
+          <input
+            id="date"
+            name="date"
+            type="date"
+          >
+
+        </div>
+
+      </div>
+
+
+      <!-- Location -->
+      <div class="form-group">
+
+        <label for="location">Service location *</label>
+
+        <input
+          id="location"
+          name="location"
+          type="text"
+          placeholder="Area, city or address"
+          required
+        >
+
+      </div>
+
+
+      <!-- Message -->
+      <div class="form-group">
+
+        <label for="message">Tell us about your space</label>
+
+        <textarea
+          id="message"
+          name="message"
+          rows="4"
+          placeholder="What would you like us to clean?"
+        ></textarea>
+
+      </div>
+
+
+      <!-- Email subject -->
+      <input
+        type="hidden"
+        name="_subject"
+        value="New SELAD Facility Service Booking"
+      >
+
+
+      <!-- Submit button -->
+      <button
+        type="submit"
+        class="btn form-submit"
+      >
+        Send booking request <span>↗</span>
+      </button>
+
+
+      <p
+        class="form-note"
+        id="formNote"
+        aria-live="polite"
+      >
+        Your booking request will be sent securely.
+      </p>
+
+    </form>
+    <!-- END FORM -->
+
+  </div>
+</section>
+```
+
 
     <!-- Testimonials -->
     <section class="section testimonials-section">
