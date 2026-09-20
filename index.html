@@ -2042,6 +2042,65 @@ h1 span, h2 span {
           </p>
         </form>
       </div>
+      <form
+  id="bookingForm"
+  action="https://formspree.io/f/xoevevqb"
+  method="POST"
+>
+
+  <label>Full name *</label>
+  <input
+    type="text"
+    name="name"
+    required
+  >
+
+  <label>Phone number *</label>
+  <input
+    type="tel"
+    name="phone"
+    required
+  >
+
+  <label>Email address</label>
+  <input
+    type="email"
+    name="email"
+  >
+
+  <label>Service needed *</label>
+  <select name="service" required>
+    <option value="">Select a service</option>
+    <option value="Office cleaning">Office cleaning</option>
+    <option value="House cleaning">House cleaning</option>
+    <option value="Deep cleaning">Deep cleaning</option>
+    <option value="Facility management">Facility management</option>
+    <option value="Other">Other</option>
+  </select>
+
+  <label>Preferred date</label>
+  <input
+    type="date"
+    name="preferred_date"
+  >
+
+  <label>Service location *</label>
+  <input
+    type="text"
+    name="service_location"
+    required
+  >
+
+  <label>Tell us about your space</label>
+  <textarea
+    name="message"
+  ></textarea>
+
+  <button type="submit">
+    Send booking request
+  </button>
+
+</form>
     </section>
 
     <!-- Testimonials -->
