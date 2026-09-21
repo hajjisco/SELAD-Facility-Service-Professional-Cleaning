@@ -2311,48 +2311,54 @@ h1 span, h2 span {
   <a class="floating-whatsapp" id="floatingWhatsapp" href="#booking"
      aria-label="Contact SELAD on WhatsApp">✆</a>
 
-  <script>
-    
+  ```html
+<script>
+
 /* ==========================================
    SELAD FACILITY SERVICE
    Website interactions
    ========================================== */
 
 /*
-  IMPORTANT:
-  Replace the example number below with your
-  business WhatsApp number.
-
-  Use international format without + or spaces.
-  Example: 2348012345678
+  WhatsApp number
+  Nigeria: 08138249660
+  International WhatsApp format: 2348138249660
 */
+const SELAD_WHATSAPP = "2348138249660";
 
-const SELAD_WHATSAPP = "08138249660";
 
-/* Mobile navigation */
+/* ==========================================
+   Mobile navigation
+   ========================================== */
+
 const menuToggle = document.getElementById("menuToggle");
 const navLinks = document.getElementById("navLinks");
 
-menuToggle.addEventListener("click", () => {
-  const isOpen = navLinks.classList.toggle("open");
+if (menuToggle && navLinks) {
+  menuToggle.addEventListener("click", () => {
+    const isOpen = navLinks.classList.toggle("open");
 
-  menuToggle.setAttribute("aria-expanded", String(isOpen));
-  menuToggle.setAttribute(
-    "aria-label",
-    isOpen ? "Close navigation" : "Open navigation"
-  );
-});
-
-// Close the mobile menu after clicking a navigation link.
-navLinks.querySelectorAll("a").forEach((link) => {
-  link.addEventListener("click", () => {
-    navLinks.classList.remove("open");
-    menuToggle.setAttribute("aria-expanded", "false");
-    menuToggle.setAttribute("aria-label", "Open navigation");
+    menuToggle.setAttribute("aria-expanded", String(isOpen));
+    menuToggle.setAttribute(
+      "aria-label",
+      isOpen ? "Close navigation" : "Open navigation"
+    );
   });
-});
 
-/* Gallery filtering */
+  navLinks.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => {
+      navLinks.classList.remove("open");
+      menuToggle.setAttribute("aria-expanded", "false");
+      menuToggle.setAttribute("aria-label", "Open navigation");
+    });
+  });
+}
+
+
+/* ==========================================
+   Gallery filtering
+   ========================================== */
+
 const galleryTabs = document.querySelectorAll(".gallery-tab");
 const galleryItems = document.querySelectorAll(".gallery-item");
 
@@ -2360,7 +2366,6 @@ galleryTabs.forEach((tab) => {
   tab.addEventListener("click", () => {
     const selectedFilter = tab.dataset.filter;
 
-    // Update the selected tab.
     galleryTabs.forEach((item) => {
       item.classList.remove("active");
       item.setAttribute("aria-pressed", "false");
@@ -2369,7 +2374,6 @@ galleryTabs.forEach((tab) => {
     tab.classList.add("active");
     tab.setAttribute("aria-pressed", "true");
 
-    // Show only the selected category.
     galleryItems.forEach((item) => {
       const category = item.dataset.category;
 
@@ -2380,7 +2384,6 @@ galleryTabs.forEach((tab) => {
   });
 });
 
-// Add accessible pressed states to gallery filters.
 galleryTabs.forEach((tab) => {
   tab.setAttribute(
     "aria-pressed",
@@ -2388,14 +2391,17 @@ galleryTabs.forEach((tab) => {
   );
 });
 
-/* FAQ accordion */
+
+/* ==========================================
+   FAQ accordion
+   ========================================== */
+
 const faqItems = document.querySelectorAll(".faq-list details");
 
 faqItems.forEach((item) => {
   item.addEventListener("toggle", () => {
     if (!item.open) return;
 
-    // Keep one FAQ open at a time.
     faqItems.forEach((otherItem) => {
       if (otherItem !== item) {
         otherItem.open = false;
@@ -2404,11 +2410,16 @@ faqItems.forEach((item) => {
   });
 });
 
-/* Set the minimum booking date to today */
+
+/* ==========================================
+   Set minimum booking date to today
+   ========================================== */
+
 const dateInput = document.getElementById("date");
 
 if (dateInput) {
   const today = new Date();
+
   const localDate = new Date(
     today.getTime() - today.getTimezoneOffset() * 60000
   )
@@ -2418,105 +2429,165 @@ if (dateInput) {
   dateInput.min = localDate;
 }
 
-/* Booking form */
+
+/* ==========================================
+   Booking form
+   ========================================== */
+
 const bookingForm = document.getElementById("bookingForm");
 const formNote = document.getElementById("formNote");
 
-bookingForm.addEventListener("submit", (event) => {
-  event.preventDefault();
+if (bookingForm) {
 
-  if (!bookingForm.reportValidity()) {
-    return;
-  }
+  bookingForm.addEventListener("submit", (event) => {
+    event.preventDefault();
 
-  // Do not send requests to the example number.
-  if (
-    !/^\d{10,15}$/.test(SELAD_WHATSAPP) ||
-    SELAD_WHATSAPP === "08138249660"
-  ) {
-    formNote.textContent =
-      "Thanks, your request has been submited!!!.";
+    if (!bookingForm.reportValidity()) {
+      return;
+    }
 
-    formNote.style.color = "#b45309";
-    return;
-  }
+    const formData = new FormData(bookingForm);
 
-  const formData = new FormData(bookingForm);
+    const name =
+      (formData.get("fullName") || "").trim();
 
-  const name = formData.get("fullName").trim();
-  const phone = formData.get("phone").trim();
-  const email = formData.get("email").trim();
-  const service = formData.get("service");
-  const date = formData.get("date") || "Not specified";
-  const location = formData.get("location").trim();
-  const message = formData.get("message").trim() || "No additional details";
+    const phone =
+      (formData.get("phone") || "").trim();
 
-  const bookingMessage = [
-    "Hello SELAD Facility Service!",
-    "",
-    "I would like to request a cleaning service.",
-    "",
-    `Name: ${name}`,
-    `Phone: ${phone}`,
-    `Email: ${email || "Not provided"}`,
-    `Service: ${service}`,
-    `Preferred date: ${date}`,
-    `Location: ${location}`,
-    `Additional details: ${message}`,
-    "",
-    "Please let me know the next steps. Thank you!"
-  ].join("\n");
+    const email =
+      (formData.get("email") || "").trim();
 
-  const whatsappURL =
-    `https://wa.me/${SELAD_WHATSAPP}?text=${encodeURIComponent(bookingMessage)}`;
+    const service =
+      formData.get("service") || "Not specified";
 
-  formNote.textContent =
-    "Your booking request is ready. WhatsApp will open so you can review and send it.";
+    const date =
+      formData.get("date") || "Not specified";
 
-  formNote.style.color = "#23875d";
+    const location =
+      (formData.get("location") || "").trim();
 
-  window.open(whatsappURL, "_blank", "noopener,noreferrer");
-});
+    const message =
+      (formData.get("message") || "").trim() ||
+      "No additional details";
 
-/* WhatsApp contact buttons */
+
+    /* Message to WhatsApp */
+
+    const bookingMessage = [
+      "Hello SELAD Facility Service!",
+      "",
+      "I would like to request a cleaning service.",
+      "",
+      `Name: ${name}`,
+      `Phone: ${phone}`,
+      `Email: ${email || "Not provided"}`,
+      `Service: ${service}`,
+      `Preferred date: ${date}`,
+      `Location: ${location}`,
+      `Additional details: ${message}`,
+      "",
+      "Please let me know the next steps. Thank you!"
+    ].join("\n");
+
+
+    /* Correct WhatsApp URL */
+
+    const whatsappURL =
+      `https://wa.me/${SELAD_WHATSAPP}?text=${encodeURIComponent(bookingMessage)}`;
+
+
+    if (formNote) {
+      formNote.textContent =
+        "Your booking request is ready. WhatsApp will open so you can review and send it.";
+
+      formNote.style.color = "#23875d";
+    }
+
+
+    /* Open WhatsApp */
+
+    window.open(
+      whatsappURL,
+      "_blank",
+      "noopener,noreferrer"
+    );
+
+  });
+
+}
+
+
+/* ==========================================
+   WhatsApp contact buttons
+   ========================================== */
+
 function configureWhatsAppLinks() {
+
   const whatsappURL =
     `https://wa.me/${SELAD_WHATSAPP}`;
 
-  const whatsappLink = document.getElementById("whatsappLink");
-  const floatingWhatsapp = document.getElementById("floatingWhatsapp");
+  const whatsappLink =
+    document.getElementById("whatsappLink");
 
-  const isConfigured =
-    /^\d{10,15}$/.test(SELAD_WHATSAPP) &&
-    SELAD_WHATSAPP !== "08138249660";
+  const floatingWhatsapp =
+    document.getElementById("floatingWhatsapp");
 
-  if (isConfigured) {
+
+  if (whatsappLink) {
+
     whatsappLink.href = whatsappURL;
-    floatingWhatsapp.href = whatsappURL;
-
     whatsappLink.target = "_blank";
-    floatingWhatsapp.target = "_blank";
-
     whatsappLink.rel = "noopener noreferrer";
-    floatingWhatsapp.rel = "noopener noreferrer";
-  } else {
-    whatsappLink.href = "#booking";
-    floatingWhatsapp.href = "#booking";
+
   }
+
+
+  if (floatingWhatsapp) {
+
+    floatingWhatsapp.href = whatsappURL;
+    floatingWhatsapp.target = "_blank";
+    floatingWhatsapp.rel = "noopener noreferrer";
+
+  }
+
 }
 
 configureWhatsAppLinks();
 
-/* Automatic footer year */
-document.getElementById("year").textContent =
-  new Date().getFullYear();
 
-/* Header scroll styling */
+/* ==========================================
+   Automatic footer year
+   ========================================== */
+
+const yearElement = document.getElementById("year");
+
+if (yearElement) {
+  yearElement.textContent =
+    new Date().getFullYear();
+}
+
+
+/* ==========================================
+   Header scroll styling
+   ========================================== */
+
 const header = document.getElementById("header");
 
-window.addEventListener("scroll", () => {
-  header.classList.toggle("scrolled", window.scrollY > 20);
-}, { passive: true });
-  </script>
+if (header) {
+
+  window.addEventListener("scroll", () => {
+
+    header.classList.toggle(
+      "scrolled",
+      window.scrollY > 20
+    );
+
+  }, { passive: true });
+
+}
+
+</script>
+
+
 </body>
 </html>
